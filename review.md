@@ -11,3 +11,4 @@ parser = config_parser() 将parser对象实例化，然后通过 parse_args() �
 
 ## load data
 ### llff
+llff即Local Light Field Fusion数据集，
