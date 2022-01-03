@@ -27,3 +27,23 @@ images：通过load_data函数加载的图片，形状为(h,w,3,N)，对应图�
 
 
 render_poses：
+
+i_test:
+
+## create nerf model
+```python
+render_kwargs_train, render_kwargs_test, start, grad_vars, optimizer = create_nerf(args)
+```
+### create_nerf
+实例化nerf的mlp模型
+```python
+    embed_fn, input_ch = get_embedder(args.multires, args.i_embed)
+
+    input_ch_views = 0
+    embeddirs_fn = None
+    if args.use_viewdirs:
+        embeddirs_fn, input_ch_views = get_embedder(args.multires_views, args.i_embed)
+    output_ch = 5 if args.N_importance > 0 else 4
+    skips = [4]
+```
+获取position encoding之后的输入
