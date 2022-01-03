@@ -62,7 +62,7 @@ def _minify(basedir, factors=[], resolutions=[]):
 def _load_data(basedir, factor=None, width=None, height=None, load_imgs=True):
     
     poses_arr = np.load(os.path.join(basedir, 'poses_bounds.npy'))
-    poses = poses_arr[:, :-2].reshape([-1, 3, 5]).transpose([1,2,0])
+    poses = poses_arr[:, :-2].reshape([-1, 3, 5]).transpose([1,2,0]) # poses.shape:(3,5,20)
     bds = poses_arr[:, -2:].transpose([1,0])
     
     img0 = [os.path.join(basedir, 'images', f) for f in sorted(os.listdir(os.path.join(basedir, 'images'))) \
@@ -114,7 +114,7 @@ def _load_data(basedir, factor=None, width=None, height=None, load_imgs=True):
     imgs = imgs = [imread(f)[...,:3]/255. for f in imgfiles]
     imgs = np.stack(imgs, -1)  
     
-    print('Loaded image data', imgs.shape, poses[:,-1,0])
+    print('Loaded image data', imgs.shape, poses[:,-1,0], imgs[100,100,:,0])
     return poses, bds, imgs
 
     
